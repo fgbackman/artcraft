@@ -1,0 +1,19 @@
+# Deploys the Artcraft desktop frontend (frontend/apps/artcraft) as a web app.
+# Features backed by Tauri APIs only work inside the desktop app.
+
+[build]
+  base = "frontend"
+  command = "npm install --no-audit --no-fund && npx nx run artcraft:build"
+  publish = "apps/artcraft/dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  VITE_ENVIRONMENT_TYPE = "production"
+  NX_DAEMON = "false"
+  NX_NO_CLOUD = "true"
+
+# Client-side routing (react-router BrowserRouter)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
